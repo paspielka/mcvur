@@ -1,5 +1,7 @@
 use std::net::*;
 
+use crate::pack::Pack;
+
 struct Packet {
     stream: TcpStream,
 }
@@ -17,6 +19,13 @@ impl Packet {
     }
 
     pub fn status_packet(&self) {
+        let packet = Pack::new(0)
+            .pack_int(760)
+            .pack_string("127.0.0.1")
+            .pack_short(25565)
+            .pack_int(1)
+            .build();
+
         
     }
 }
